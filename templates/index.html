@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>مساعدي الشخصي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <h1 data-i18n="appTitle">مساعدي الشخصي</h1>
+    <button id="langToggle" class="ghost" type="button">English</button>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="chat" aria-selected="true" data-i18n="chat">المحادثة</button>
+    <button role="tab" data-tab="tasks" aria-selected="false" data-i18n="tasks">المهام</button>
+    <button role="tab" data-tab="notes" aria-selected="false" data-i18n="notes">الملاحظات</button>
+  </nav>
+
+  <main class="layout">
+    <section class="panel active" id="panel-chat" aria-labelledby="chatHeading">
+      <div class="panel-head">
+        <h2 id="chatHeading" data-i18n="chat">المحادثة</h2>
+        <button id="newChat" class="ghost small" type="button" data-i18n="newChat">محادثة جديدة</button>
+      </div>
+      <div id="messages" class="messages" aria-live="polite"></div>
+      <form id="chatForm" class="row">
+        <input id="chatInput" autocomplete="off" required data-i18n-placeholder="chatPlaceholder" placeholder="اكتب رسالتك…">
+        <button type="submit" data-i18n="send">إرسال</button>
+      </form>
+    </section>
+
+    <section class="panel" id="panel-tasks" aria-labelledby="tasksHeading">
+      <div class="panel-head">
+        <h2 id="tasksHeading" data-i18n="tasks">المهام</h2>
+        <select id="taskFilter" aria-label="filter">
+          <option value="open" data-i18n="open">الحالية</option>
+          <option value="done" data-i18n="done">المنتهية</option>
+          <option value="all" data-i18n="all">الكل</option>
+        </select>
+      </div>
+      <form id="taskForm" class="stack">
+        <input id="taskTitle" required data-i18n-placeholder="taskPlaceholder" placeholder="مهمة جديدة…">
+        <div class="row">
+          <input id="taskDue" type="date" aria-label="due date">
+          <select id="taskPriority" aria-label="priority">
+            <option value="low" data-i18n="low">منخفضة</option>
+            <option value="medium" selected data-i18n="medium">متوسطة</option>
+            <option value="high" data-i18n="high">عالية</option>
+          </select>
+          <button type="submit" data-i18n="add">إضافة</button>
+        </div>
+      </form>
+      <ul id="taskList" class="list"></ul>
+    </section>
+
+    <section class="panel" id="panel-notes" aria-labelledby="notesHeading">
+      <div class="panel-head">
+        <h2 id="notesHeading" data-i18n="notes">الملاحظات</h2>
+        <input id="noteSearch" type="search" data-i18n-placeholder="search" placeholder="بحث…">
+      </div>
+      <form id="noteForm" class="stack">
+        <input id="noteTitle" required data-i18n-placeholder="noteTitle" placeholder="عنوان الملاحظة">
+        <textarea id="noteContent" rows="3" data-i18n-placeholder="noteContent" placeholder="المحتوى (اختياري)"></textarea>
+        <button type="submit" data-i18n="save">حفظ</button>
+      </form>
+      <ul id="noteList" class="list"></ul>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
